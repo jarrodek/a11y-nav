@@ -1,0 +1,126 @@
+html {
+  --list-active-background: #e3f2fd;
+  /* when hovering over a list item  */
+  --list-hover-background: rgba(0, 0, 0, 0.08);
+  /* when highlighting a list item  */
+  --list-highlight-background: rgba(0, 0, 0, 0.12);
+  /* when focusing within a list item  */
+  --list-focus-background: rgba(0, 0, 0, 0.04);
+  --list-item-height: 40px;
+  --list-item-two-line-height: 72px;
+
+  --selection-color: #1976d2;
+  --secondary-selection-color: #64b5f6;
+}
+
+body {
+  display: grid;
+  grid-template:
+    "header header" 72px
+    "nav content"
+    "footer footer" 20px / minmax(200px, 2fr) 10fr;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: auto;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  grid-area: header;
+  background-color: var(--app-header-background-color, #ffffff);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px var(--app-header-border-bottom-color, rgba(0, 0, 0, 0.12))
+    solid;
+}
+
+nav {
+  margin-top: 20px;
+  grid-area: nav;
+  user-select: none;
+}
+main {
+  overflow: auto;
+  margin-top: 20px;
+  padding: 0 20px;
+  grid-area: content;
+}
+footer {
+  grid-area: footer;
+  background-color: var(--app-footer-background-color, #e6e6e6);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 0 12px;
+}
+
+ul.root,
+ul.root ul {
+  margin: 0;
+  padding: 0;
+  list-style-image: none;
+}
+
+.list-item-content {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+li:not([aria-disabled="true"]):not(.selected) .list-item-content:hover {
+  background-color: var(--list-hover-background);
+}
+
+ul.root li {
+  outline: none;
+  list-style: none;
+  /* 
+    This will move the indented this way children to the right.
+    Even though this is the default behavior probably this is not
+    what you want. Your implementation has to indent each
+    list item manually (by setting styles). Until the CSS's "attr()"
+    function is not widely supported this element won't try to 
+    do standardize the way to do this.
+  */
+  padding-left: 8px;
+}
+
+.root > li {
+  padding-left: 0;
+}
+
+.root:focus-within li:focus > .list-item-content,
+.root:focus-within li.focused > .list-item-content {
+  outline: 1px #000 solid;
+}
+
+.root li.selected > .list-item-content {
+  background: var(--list-active-background, #e3f2fd);
+}
+
+.item-label {
+  font-size: medium;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.group-toggle-icon {
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.opened > div > .group-toggle-icon {
+  transform: rotate(90deg);
+  margin-right: 8px;
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="Description" content="Accessible navigation tree.">
+  <title>a11y nav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="./src/styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>Accessible navigation tree</header>
+  <nav>
+    <ul aria-label="Main navigation" aria-multiselectable="false" tabindex="0" class="root" role="tree">
+      <li role="treeitem" data-draggable="true" data-id="api-summary">
+        <div class="list-item-content"><span class="item-label" title="API summary">API summary</span></div>
+      </li>
+      <li role="treeitem" class="parent-item" aria-expanded="false" data-id="endpoints" aria-label="Endpoints">
+        <div class="list-item-content">
+          <button class="group-toggle-icon" tabindex="-1">›</button>
+          <span class="item-label" title="API endpoints">Endpoints</span>
+        </div>
+        <ul role="group" hidden aria-hidden="true">
+          <li role="treeitem" data-draggable="true" data-id="/pets">
+            <div class="list-item-content">/pets</div>
+          </li>
+          <li role="treeitem" data-draggable="true" data-id="/pets/pet">
+            <div class="list-item-content">/pets/pet</div>
+          </li>
+        </ul>
+      </li>
+      <li role="treeitem" class="parent-item" aria-expanded="false" data-id="data-types" aria-label="Data types">
+        <div class="list-item-content">
+          <button class="group-toggle-icon" tabindex="-1">›</button>
+          <span class="item-label" title="API data types">Data types</span>
+        </div>
+        <ul role="group" hidden aria-hidden="true">
+          <li role="treeitem" data-draggable="true" data-id="type-pet">
+            <div class="list-item-content">Pet</div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <p>
+      This shows an example navigation for a SPA that uses tree role and is accessible.
+    </p>
+    <p>
+      Assumptions and configuration
+    </p>
+    <ul>
+      <li>Toggle icons (for tree items) are not focusable. The list item is focusable and when focusing it the user can manipulate the visibility of children.</li>
+      <li>List items have "data-id" which is an identifier on a node. It could use `id` as well but in some environments it is not desired. Each `data-id` is unique for the tree.</li>
+      <li>List elements with <code>aria-disabled</code> set to <code>true</code> are not considered active.</li>
+    </ul>
+  </main>
+  <footer>By Pawel Uchida-Psztyc</footer>
+  <script type="module" src="./out-tsc/src/a11y-nav.js"></script>
+</body>
+
+</html>
